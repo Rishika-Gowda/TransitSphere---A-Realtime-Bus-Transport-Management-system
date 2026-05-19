@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="landing-hero">
+  <div class="hero-map-grid"></div>
+  <nav class="landing-nav">
+    <a class="brand" href="/"><span class="brand-mark">B</span><span>BMTC Smart Transport AI</span></a>
+    <div>
+      <a href="#features">Features</a>
+      <a href="#ai">AI</a>
+      <a href="#contact">Contact</a>
+      <a href="/dashboard">Dashboard</a>
+      <a class="btn btn-info btn-sm" href="/login">Sign in</a>
+      <a class="btn btn-outline-light btn-sm" href="/admin-login">Admin</a>
+    </div>
+  </nav>
+  <div class="container hero-content">
+    <p class="eyebrow">Bengaluru smart mobility command platform</p>
+    <h1>BMTC Smart Transport AI Platform</h1>
+    <p class="hero-copy">Realtime bus operations, GTFS route intelligence, AI demand forecasting, congestion heatmaps, weather-aware scheduling, and smart alerts in one government-grade command center.</p>
+    <div class="hero-actions">
+      <a href="/dashboard" class="btn btn-info btn-lg">View general dashboard</a>
+      <a href="/login" class="btn btn-outline-light btn-lg">Sign in for operations</a>
+      <a href="#features" class="btn btn-outline-light btn-lg">Explore capabilities</a>
+    </div>
+    <div class="metric-strip">
+      <div><strong data-counter="7420">0</strong><span>Predicted riders/hr</span></div>
+      <div><strong data-counter="7">0</strong><span>Live corridors</span></div>
+      <div><strong data-counter="96">0</strong><span>ETA confidence</span></div>
+      <div><strong data-counter="14">0</strong><span>Smart alerts</span></div>
+    </div>
+  </div>
+</section>
+<section class="section-band" id="features">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Operations modules</span>
+      <h2>Built like a real smart-city mobility control room</h2>
+    </div>
+    <div class="feature-grid">
+      {% for icon,title,text in [
+        ('bi-bus-front','Live Tracking','Animated buses, route overlays, stops, ETAs, occupancy and speed telemetry.'),
+        ('bi-graph-up-arrow','AI Forecasting','LSTM-style demand prediction using route, weather, congestion and peak-hour patterns.'),
+        ('bi-calendar2-week','Smart Scheduling','Dynamic bus allocation, short turns, route balancing and dispatcher recommendations.'),
+        ('bi-signpost-split','Congestion Analytics','Heatmaps, delay hotspots, traffic intensity and bottleneck intelligence.'),
+        ('bi-bell','Smart Alerts','Realtime operational warnings for crowding, weather, delays and maintenance.'),
+        ('bi-map','GTFS Intelligence','Routes, trips, stops, shapes, calendars and schedule-derived route intelligence.')
+      ] %}
+      <article class="glass-card feature-card"><i class="bi {{ icon }}"></i><h3>{{ title }}</h3><p>{{ text }}</p></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section-band alt" id="ai">
+  <div class="container ai-showcase">
+    <div>
+      <span class="eyebrow">AI analytics showcase</span>
+      <h2>Demand, congestion, weather and fleet decisions move together</h2>
+      <p>The demo engine simulates Bengaluru corridors including Majestic, Whitefield, Silk Board, Electronic City, KR Puram, Hebbal and MG Road with live telemetry and control recommendations.</p>
+      <a class="btn btn-outline-info" href="/login">Sign in to view AI forecasting</a>
+    </div>
+    <div class="glass-card ops-visual">
+      <span></span><span></span><span></span><span></span>
+      <div class="pulse-bus"><i class="bi bi-bus-front-fill"></i></div>
+    </div>
+  </div>
+</section>
+<section class="section-band" id="contact">
+  <div class="container contact-panel">
+    <h2>Ready for demo, deployment, and portfolio review</h2>
+    <p>Includes Docker, GTFS sample feeds, modular Flask blueprints, realtime APIs and a professional README.</p>
+    <a class="btn btn-info" href="/dashboard">View dashboard</a>
+    <a class="btn btn-outline-info ms-2" href="/admin-login">Admin monitoring login</a>
+  </div>
+</section>
+{% endblock %}

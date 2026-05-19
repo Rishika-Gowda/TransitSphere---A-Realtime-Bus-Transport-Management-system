@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block page_title %}Smart Alerts{% endblock %}
+{% block content %}
+<section class="alert-center">
+  {% for alert in alerts %}
+  <article class="glass-card alert-card {{ alert.priority|lower }}"><span>{{ alert.priority }}</span><h3>{{ alert.title }}</h3><p>{{ alert.body }}</p><small>{{ alert.tag }}</small></article>
+  {% endfor %}
+</section>
+{% endblock %}

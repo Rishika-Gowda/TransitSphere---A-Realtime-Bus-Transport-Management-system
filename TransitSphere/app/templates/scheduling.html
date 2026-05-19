@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block page_title %}Smart Scheduling{% endblock %}
+{% block content %}
+<section class="glass-card table-card">
+  <div class="card-toolbar"><h3>AI dispatcher recommendations</h3><button class="btn btn-outline-info btn-sm"><i class="bi bi-download"></i> Export report</button></div>
+  <div class="table-responsive"><table class="table table-dark align-middle"><thead><tr><th>Route</th><th>Corridor</th><th>Action</th><th>Impact</th><th>Priority</th></tr></thead><tbody>{% for r in plan.recommendations %}<tr><td>{{ r.route }}</td><td>{{ r.corridor }}</td><td>{{ r.action }}</td><td>{{ r.impact }}</td><td><span class="badge text-bg-info">{{ r.priority }}</span></td></tr>{% endfor %}</tbody></table></div>
+</section>
+<section class="glass-card mt-4"><h3>Optimized headway plan</h3><canvas id="headwayChart"></canvas></section>
+<script id="scheduleData" type="application/json">{{ plan|tojson }}</script>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/scheduling.js') }}"></script>{% endblock %}

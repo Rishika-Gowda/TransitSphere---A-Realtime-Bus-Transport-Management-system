@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block page_title %}AI Demand Forecasting{% endblock %}
+{% block content %}
+<section class="analytics-grid">
+  <div class="glass-card wide"><h3>LSTM passenger demand forecast</h3><canvas id="forecastChart"></canvas></div>
+  <div class="glass-card"><h3>Overcrowding predictions</h3><canvas id="riskChart"></canvas></div>
+  <div class="glass-card insight-list"><h3>Allocation suggestions</h3>{% for row in forecasts.allocation %}<p><i class="bi bi-cpu"></i><b>{{ row.route }}:</b> add {{ row.add_buses }} buses. {{ row.reason }}</p>{% endfor %}</div>
+  <div class="glass-card"><h3>Model inputs</h3><div class="input-chips"><span>Time</span><span>Route</span><span>Historical demand</span><span>Weather</span><span>Congestion</span><span>Peak trend</span></div></div>
+</section>
+<script id="forecastData" type="application/json">{{ forecasts|tojson }}</script>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>{% endblock %}

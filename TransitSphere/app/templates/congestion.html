@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block page_title %}Congestion Analytics{% endblock %}
+{% block content %}
+<section class="analytics-grid">
+  <div class="glass-card wide map-panel"><div id="congestionMap"></div></div>
+  <div class="glass-card"><h3>Hotspots</h3>{% for h in hotspots %}<div class="hotspot"><b>{{ h.name }}</b><span>{{ (h.intensity * 100)|round|int }}% intensity · {{ h.delay }} min delay</span></div>{% endfor %}</div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/congestion.js') }}"></script>{% endblock %}

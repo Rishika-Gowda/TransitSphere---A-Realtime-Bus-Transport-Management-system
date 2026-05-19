@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block page_title %}User Dashboard{% endblock %}
+{% block content %}
+<section class="user-home">
+  <div class="welcome-panel">
+    <div>
+      <span class="eyebrow">Signed-in workspace</span>
+      <h2>BMTC mobility tools are ready</h2>
+      <p>Access live bus tracking, GTFS routes, AI demand forecasts, congestion analysis, scheduling recommendations and smart alerts from one place.</p>
+    </div>
+    <div class="welcome-stat">
+      <strong>{{ kpis.total_routes }}</strong>
+      <span>routes loaded from BMTC GTFS</span>
+    </div>
+  </div>
+  <div class="quick-grid">
+    {% for href,icon,title,text in [
+      ('/tracking','bi-bus-front','Live Bus Tracking','View moving buses, stops, occupancy, speed, delay and route overlays.'),
+      ('/dashboard','bi-grid-1x2','Operations Dashboard','Monitor KPIs, weather impact, maps, charts and AI recommendations.'),
+      ('/analytics','bi-cpu','AI Forecasting','Explore demand forecasts, delay probability and allocation suggestions.'),
+      ('/scheduling','bi-calendar2-week','Smart Scheduling','Review dispatcher actions, headways and route balancing plans.'),
+      ('/congestion','bi-signpost-split','Congestion Analytics','See hotspot heatmaps, delay-prone zones and corridor pressure.'),
+      ('/alerts','bi-bell','Smart Alerts','Track overcrowding, congestion, weather and maintenance notifications.')
+    ] %}
+    <a class="glass-card quick-card" href="{{ href }}"><i class="bi {{ icon }}"></i><h3>{{ title }}</h3><p>{{ text }}</p><span>Open <i class="bi bi-arrow-right"></i></span></a>
+    {% endfor %}
+  </div>
+  <div class="glass-card table-card compact-table">
+    <div class="card-toolbar"><h3>Featured routes from dataset</h3><a class="btn btn-outline-info btn-sm" href="/tracking">Track routes</a></div>
+    <div class="table-responsive">
+      <table class="table table-dark align-middle">
+        <thead><tr><th>Route</th><th>Name</th><th>Type</th></tr></thead>
+        <tbody>{% for route in routes %}<tr><td>{{ route.route_short_name }}</td><td>{{ route.route_long_name }}</td><td>BMTC Bus</td></tr>{% endfor %}</tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

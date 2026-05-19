@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-page">
+  <form class="auth-card" method="post">
+    <h1>Create operator account</h1>
+    <label>Name</label><input class="form-control" name="name" placeholder="Operator name">
+    <label>Email</label><input class="form-control" name="email" placeholder="you@bmtc.ai">
+    <label>Role</label><select class="form-select" name="role"><option>Dispatcher</option><option>Transport Operator</option><option>Admin</option></select>
+    <button class="btn btn-info w-100 mt-3">Register</button>
+    <div class="auth-links"><a href="/login">Back to login</a></div>
+  </form>
+</section>
+{% endblock %}

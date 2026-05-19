@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block page_title %}Command Center{% endblock %}
+{% block content %}
+<section class="content-grid">
+  <div class="kpi-grid">
+    {% for label,key,icon in [
+      ('Active buses','active_buses','bi-bus-front'),('Total routes','total_routes','bi-signpost'),('Live occupancy','live_occupancy','bi-people'),
+      ('Congestion index','congestion_index','bi-activity'),('Delayed buses','delayed_buses','bi-clock-history'),('Predicted demand','predicted_demand','bi-graph-up'),
+      ('Fuel efficiency','fuel_efficiency','bi-fuel-pump'),('Route performance','route_performance','bi-speedometer2')
+    ] %}
+    <article class="glass-card kpi-card"><i class="bi {{ icon }}"></i><span>{{ label }}</span><strong id="kpi-{{ key }}">{{ kpis[key] }}</strong></article>
+    {% endfor %}
+  </div>
+  <div class="dashboard-layout">
+    <div class="glass-card map-panel"><div id="miniMap"></div></div>
+    <div class="glass-card"><h3>Passenger demand trends</h3><canvas id="demandChart"></canvas></div>
+    <div class="glass-card"><h3>Route utilization</h3><canvas id="routeChart"></canvas></div>
+    <div class="glass-card" id="weatherCard"><h3>Weather impact</h3><p class="text-secondary">Loading Bengaluru weather model...</p></div>
+    <div class="glass-card insight-list"><h3>AI recommendations</h3>{% for item in insights %}<p><i class="bi bi-stars"></i>{{ item }}</p>{% endfor %}</div>
+    <div class="glass-card alert-list"><h3>Operational alerts</h3>{% for alert in alerts %}<div class="alert-row {{ alert.priority|lower }}"><span>{{ alert.priority }}</span><b>{{ alert.title }}</b><small>{{ alert.body }}</small></div>{% endfor %}</div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>{% endblock %}

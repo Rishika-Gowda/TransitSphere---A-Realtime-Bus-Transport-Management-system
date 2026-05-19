@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="auth-page">
+  <form class="auth-card" method="post">
+    <a class="brand justify-content-center" href="/"><span class="brand-mark">B</span><span>BMTC AI</span></a>
+    <h1>{% if admin_login %}Admin login{% else %}User sign in{% endif %}</h1>
+    <p>{% if admin_login %}Admin access is for monitoring platform health, command-center dashboards and operations status.{% else %}Sign in to use live tracking, scheduling, forecasting, congestion tools and alerts.{% endif %}</p>
+    {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+    <label>Email</label><input class="form-control" name="email" value="{% if admin_login %}admin@bmtc.ai{% else %}dispatcher@bmtc.ai{% endif %}">
+    <label>Password</label><input class="form-control" type="password" name="password" value="{% if admin_login %}admin123{% else %}dispatch123{% endif %}">
+    <button class="btn btn-info w-100 mt-3">{% if admin_login %}Login as admin{% else %}Sign in{% endif %}</button>
+    <div class="auth-links">
+      {% if admin_login %}<a href="/login">User sign in</a>{% else %}<a href="/register">Create account</a>{% endif %}
+      <a href="/forgot-password">Forgot password?</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

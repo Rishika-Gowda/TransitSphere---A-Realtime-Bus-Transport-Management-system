@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}BMTC Smart Transport AI Platform{% endblock %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+  <div class="app-shell">
+    {% if request.endpoint != 'dashboard.landing' and 'auth.' not in request.endpoint %}
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="{{ url_for('dashboard.dashboard') }}"><span class="brand-mark">B</span><span>BMTC AI</span></a>
+      <nav>
+        <a href="/dashboard"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+        {% if session.get('user') %}
+        <a href="/user-dashboard"><i class="bi bi-house-check"></i> User Home</a>
+        <a href="/tracking"><i class="bi bi-bus-front"></i> Live Tracking</a>
+        <a href="/analytics"><i class="bi bi-graph-up-arrow"></i> AI Forecasting</a>
+        <a href="/scheduling"><i class="bi bi-calendar2-week"></i> Scheduling</a>
+        <a href="/congestion"><i class="bi bi-signpost-split"></i> Congestion</a>
+        <a href="/alerts"><i class="bi bi-bell"></i> Alerts</a>
+        {% else %}
+        <a href="/login"><i class="bi bi-box-arrow-in-right"></i> User Sign In</a>
+        <a href="/admin-login"><i class="bi bi-shield-lock"></i> Admin Login</a>
+        {% endif %}
+      </nav>
+    </aside>
+    {% endif %}
+    <main class="main">
+      {% if request.endpoint != 'dashboard.landing' and 'auth.' not in request.endpoint %}
+      <header class="topbar">
+        <button class="icon-btn" id="sidebarToggle" title="Toggle sidebar"><i class="bi bi-layout-sidebar"></i></button>
+        <div>
+          <div class="eyebrow">Bengaluru Transport Operations Center</div>
+          <h1>{% block page_title %}Command Center{% endblock %}</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="weather-pill"><i class="bi bi-cloud-rain"></i> 24°C, light rain risk</span>
+          <button class="icon-btn" id="themeToggle" title="Toggle theme"><i class="bi bi-moon-stars"></i></button>
+          {% if session.get('user') %}
+          <span class="weather-pill"><i class="bi bi-person-badge"></i> {{ session.get('user').role }}</span>
+          <a class="btn btn-sm btn-outline-info" href="/logout">Logout</a>
+          {% else %}
+          <a class="btn btn-sm btn-outline-info" href="/login">User sign in</a>
+          <a class="btn btn-sm btn-info" href="/admin-login">Admin</a>
+          {% endif %}
+        </div>
+      </header>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <div id="toastDock" class="toast-dock"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block page_title %}Live Bus Tracking{% endblock %}
+{% block content %}
+<section class="tracking-shell">
+  <div class="tracking-controls glass-card">
+    <input id="routeSearch" class="form-control" placeholder="Search route or stop">
+    <select id="routeFilter" class="form-select"><option value="">Featured BMTC routes</option>{% for r in routes %}<option value="{{ r.route_id }}">{{ r.route_short_name }} - {{ r.route_long_name }}</option>{% endfor %}</select>
+    <div id="fleetList" class="fleet-list"></div>
+  </div>
+  <div id="trackingMap"></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/tracking.js') }}"></script>{% endblock %}
