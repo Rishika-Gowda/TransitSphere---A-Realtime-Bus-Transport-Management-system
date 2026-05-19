@@ -1,6 +1,6 @@
-# 🚀 TransitMind AI
+# 🚀 TransitSphere 
 
-### *AI-Powered Intelligent Urban Transport Optimization Platform*
+### * A Realtime Bus Transport Management System *
 
 ## 📌 Overview
 
